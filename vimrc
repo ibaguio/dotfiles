@@ -6,11 +6,30 @@ runtime ~/.vim/autoload/pathogen.vim
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
 
-" Shortcuts
-
 " Custom mappings
 let mapleader = ","			    " set comma as leader
 nnoremap <leader><space> :nohlsearch<cr>
+nnoremap <leader>qq :q<cr>      " quit without saving
+nnoremap <leader>xx :x<cr>      " save and quit
+nnoremap <leader>ss :w<cr>      " save
+
+nnoremap <C-t> :tabnew<cr>
+inoremap <C-t> <Esc>:tabnew<cr>
+nnoremap <C-w> :tabclose<cr>
+nnoremap <C-tab> :tabnext<cr> " this seems to not be working :((
+nnoremap <S-tab> :tabprevious<cr>
+
+"Window splitting remap"
+nnoremap <C-b>% <C-w>v<C-w>l    " tmux like horizontal splitting
+nnoremap <C-b>" <C-w>s<C-w>j    " tmux like vertical splitting
+nnoremap <C-h> <C-w>h
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+
+" easier moving of code blocks
+vnoremap < <gv
+vnoremap > >gv
 
 " Disable arrow keys in insert mode. Expert Mode!
 map <up> <nop>
@@ -50,15 +69,16 @@ set relativenumber
 set ignorecase
 set smartcase
 set cursorline					" highlight current line
-set wildmenu						" visual autocomplete for command menu
+set wildmenu					" visual autocomplete for command menu
 set noerrorbells
+set visualbell
 set lazyredraw					" redraw only when needed
 
 " Folding
 set foldenable					" enable folding
 set foldlevelstart=10		    " open most folds by default
 set foldnestmax=10			    " 10 nested fold max
-set foldmethod=indent		    " fold based on indent level, 
+set foldmethod=indent		    " fold based on indent level,
 nnoremap <space> za			    " open/close folds
 
 " Searching
@@ -73,13 +93,14 @@ nnoremap j gj
 nnoremap k gk
 
 set mouse=a                     " allow scrolling using mouse
+set bs=2                        " make backspace behave like normal again
 
 " easier moving between tabs
 map <Leader>n <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
 
 " move to beginning/end of line
-nnoremap B ^ 
+nnoremap B ^
 nnoremap E $
 
 " highlight last inserted text
@@ -95,19 +116,16 @@ filetype plugin on
 call pathogen#infect()
 call pathogen#helptags()
 
-" ============================================================================
-" Python IDE Setup
-" ============================================================================
-
+" PLUGIN CONFIGS
+" vim gitgutter
+" nerdcommenter
+" vim markdown
+"
 " Settings for vim-powerline
-" cd ~/.vim/bundle
-" git clone git://github.com/Lokaltog/vim-powerline.git
 set laststatus=2
 
 " Settings for ctrlp
-" cd ~/.vim/bundle
-" git clone https://github.com/kien/ctrlp.vim.git
-let g:ctrlp_max_height = 10 
+let g:ctrlp_max_height = 10
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
@@ -160,9 +178,11 @@ set clipboard=unnamedplus
 autocmd vimenter * NERDTree
 map <Leader>t <plug>NERDTreeTabsToggle<CR>
 
+" =============================================
+" NERDTREE CONFIGURATION
+" =============================================
 " move nerdtree to the right
 let g:NERDTreeWinPos = "left"
-" " move to the first buffer
 autocmd VimEnter * wincmd p
 let NERDTREEIgnore = ['\.pyc$']
 " paste toggle
@@ -171,3 +191,6 @@ set pastetoggle=<F2>
 " turn off auto complete
 " let g:pymode_rope_completion = 0
 " let g:pymode_rope_complete_on_dot = 0
+
+" vim-better-whitespace
+autocmd BufWritePre * StripWhitespace   " remove trailing whitepsace on save
