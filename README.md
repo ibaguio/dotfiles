@@ -4,8 +4,9 @@ This repository contains configuration files, and install scripts for personal c
 
 To install and configure everything.
 
-    mv ibaguio-configs ~/.ibaguio-configs
-    cd ~/.ibaguio-configs/
+    git clone https://github.com/ibaguio/dotfiles/
+    mv dotfiles/ ~/.dotfiles/
+    cd ~/.dotfiles/
     ./install.sh
 
 Software Configs Available:
@@ -15,4 +16,5 @@ Software Configs Available:
     * zsh
 
 TODO:
+
     * Fix pymode
