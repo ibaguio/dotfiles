@@ -1,0 +1,4 @@
+# Custom aliases and commands to be appended to shell's rc file
+
+# Don't use nano
+alias nano='vim'
