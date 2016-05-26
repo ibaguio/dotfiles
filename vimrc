@@ -27,6 +27,8 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-j> <C-w>j
 
+" toggle gundo
+nnoremap <leader>u :GundoToggle<cr>
 " easier moving of code blocks
 vnoremap < <gv
 vnoremap > >gv
@@ -66,6 +68,7 @@ set wrap "wrap lines"
 " UI Config
 set ruler
 set relativenumber
+set number                      " relative + numbers = hybrid
 set ignorecase
 set smartcase
 set cursorline					" highlight current line
@@ -99,16 +102,14 @@ set bs=2                        " make backspace behave like normal again
 map <Leader>n <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
 
-" move to beginning/end of line
-nnoremap B ^
-nnoremap E $
-
 " highlight last inserted text
 nnoremap gV `[v`]
 
-"" Files, backup, undo
-set nobackup
-set nowb
+" auto NORMAL mode after being idle
+au CursorHoldI * stopinsert
+" set updatetime to 15secs when in insertmode
+au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
+au InsertLeave * let &updatetime=updaterestore
 
 " Pathogen load
 filetype off
@@ -172,7 +173,7 @@ set nofoldenable
 set wildmenu
 set wildmode=list:longest,full
 
-set clipboard=unnamedplus
+set clipboard=unnamed
 
 " load up the nerd tree
 autocmd vimenter * NERDTree
@@ -194,3 +195,18 @@ set pastetoggle=<F2>
 
 " vim-better-whitespace
 autocmd BufWritePre * StripWhitespace   " remove trailing whitepsace on save
+
+" ag.vim configuration
+let g:ag_working_path_mode="r"
+
+" gundo.vim configuration
+set undodir=~/.vim/tmp/undo//
+" set backupdir=~/.vim/tmp/backup//
+" set directory=~/.vim/tmp/swap//
+" set backupskip=/tmp/*,/private/tmp/*
+" set nobackup
+set noswapfile
+
+set undofile
+set undolevels=100
+
