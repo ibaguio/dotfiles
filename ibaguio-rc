@@ -2,3 +2,11 @@
 
 # Don't use nano
 alias nano='vim'
+alias whatsmyip="curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//'"
+
+# alias wget to curl in osx machines
+unamestr=`uname`
+if [[ "$unamestr" == 'Darwin' ]]; then
+    alias wget='curl -O'
+fi
+
