@@ -10,3 +10,4 @@ if [[ "$unamestr" == 'Darwin' ]]; then
     alias wget='curl -O'
 fi
 
+alias kill_wine='ps ax |grep wine |cut -d" " -f2 |xargs kill'

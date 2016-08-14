@@ -16,5 +16,5 @@ Software Configs Available:
     * zsh
 
 TODO:
-
+    * compile whatsmyip to bash
     * Fix pymode

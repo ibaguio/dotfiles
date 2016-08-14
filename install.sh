@@ -1,9 +1,12 @@
-#!/bin/bash
+
 # Install dot files
 
 # copy this directory to ~/.dotfiles
 cp -r `pwd` ~/.dotfiles
 cd ~/.dotfiles/
+
+# Install tmux plugins
+git clone https://github.com/tmux-plugins/tpm tmux/plugins/tpm
 
 # just create symlinks to this dir
 ln -sf `pwd`/tmux.conf ~/.tmux.conf
@@ -39,5 +42,7 @@ git clone http://github.com/sjl/gundo.vim.git
 git clone https://github.com/rking/ag.vim
 
 # source personal rc-file
-echo "source ~/.dotfiles/ibaguio-rc" >> ~/.bashrc
-echo "source ~/.dotfiles/ibaguio-rc" >> ~/.zshrc
+echo "for f in ~/.dotfiles/ibaguio-rc/*; do source $f; done > ~/.bashrc
+echo "for f in ~/.dotfiles/ibaguio-rc/*; do source $f; done > ~/.zshrc
+#echo "source ~/.dotfiles/ibaguio-rc" >> ~/.bashrc
+#echo "source ~/.dotfiles/ibaguio-rc" >> ~/.zshrc
