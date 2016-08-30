@@ -11,3 +11,14 @@ if [[ "$unamestr" == 'Darwin' ]]; then
 fi
 
 alias kill_wine='ps ax |grep wine |cut -d" " -f2 |xargs kill'
+
+# Modify builtin CD with auto virtualenv activation
+# if the directory has a bin/activate file
+function cd() {
+    # cd to the directory
+    builtin cd $@
+    if [ -f bin/activate ]; then
+        source bin/activate
+    fi
+}
+
