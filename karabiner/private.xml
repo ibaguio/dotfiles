@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<root>
+    <appdef>
+        <appname>ITERM</appname>
+        <equal>com.googlecode.iterm2</equal>
+    </appdef>
+
+    <item>
+        <name>OPTION_R to Ctrl + b on iterm</name>
+        <appendix>This reduces keystrokes when using tmux</appendix>
+        <identifier>private.app_iterm_shift_r</identifier>
+        <only> ITERM </only>
+        <autogen>
+            __KeyToKey__
+            KeyCode::OPTION_R,
+            KeyCode::B,       ModifierFlag::CONTROL_R
+        </autogen>
+
+    </item>
+</root>
