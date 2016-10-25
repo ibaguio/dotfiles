@@ -1,27 +1,40 @@
 
 # Install dot files
+# Includes installation & configuration for:
+#   tmux, vim, and other command line necesseties
+#  TMUX
+#    - tmux-plugin-manager (tpm)
+#    - tmux-yank
 
+# GENERAL INSTALLATIONS
 # copy this directory to ~/.dotfiles
 cp -r `pwd` ~/.dotfiles
 cd ~/.dotfiles/
-
-# Install tmux plugins
-git clone https://github.com/tmux-plugins/tpm tmux/plugins/tpm
 
 # just create symlinks to this dir
 ln -sf `pwd`/tmux.conf ~/.tmux.conf
 ln -sf `pwd`/vimrc ~/.vimrc
 ln -sf `pwd`/psqlrc ~/.psqlrc
+ln -sf `pwd`/my.cnf ~/.my.cnf
 
 mkdir -p ~/.vim/bundle/
 mkdir -p ~/.vim/autoload/
 
+# OS Specific installations
+echo "Installing OS specific packages"
 unamestr=`uname`
+# DEBIAN LINUX
 if [[ "$unamestr" == 'Linux' ]]; then
-    sudo apt-get install -y automake pkg-config libpcre3-dev zlib1g-dev liblzma-dev
+    sudo apt-get install -y automake pkg-config libpcre3-dev zlib1g-dev liblzma-dev xclip
+    echo "alias pbcopy='xclip -selection clipboard'" > ~/.bashrc
+    echo "alias pbpaste='xclip -selection clipboard -o'" > ~/.zshrc
+# OSX
 elif [[ "$unamestr" == 'Darwin' ]]; then
     brew install automake pkg-config pcre xz
 fi
+
+# VIM INSTALLATION
+echo "Installing VIM"
 # install pathogen
 curl https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim -o ~/.vim/autoload/pathogen.vim
 
@@ -41,8 +54,13 @@ git clone https://github.com/airblade/vim-gitgutter
 git clone http://github.com/sjl/gundo.vim.git
 git clone https://github.com/rking/ag.vim
 
+# TMUX INSTALLATIONS
+echo "Installing tmux"
+# Install tmux plugins
+git clone https://github.com/tmux-plugins/tpm tmux/plugins/tpm
+
 # source personal rc-file
 echo "for f in ~/.dotfiles/ibaguio-rc/*; do source $f; done > ~/.bashrc
 echo "for f in ~/.dotfiles/ibaguio-rc/*; do source $f; done > ~/.zshrc
-#echo "source ~/.dotfiles/ibaguio-rc" >> ~/.bashrc
-#echo "source ~/.dotfiles/ibaguio-rc" >> ~/.zshrc
+
+echo "Instalation completed!"
