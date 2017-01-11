@@ -2,7 +2,7 @@
 
 # Don't use nano
 alias nano='vim'
-alias whatsmyip="curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//'"
+alias whatsmyip="dig TXT +short o-o.myaddr.l.google.com @ns1.google.com"
 
 # alias wget to curl in osx machines
 unamestr=`uname`
@@ -18,7 +18,7 @@ if [[ "$unamestr" == 'Darwin' ]]; then
 
        if [ "$1" = "reset" ]; then
            # original mac address of device
-           mac=""
+           mac="ac:bc:32:9e:d0:c7"
            echo "Resetting mac to $mac"
        elif [ "$1" = "random" ]; then
            mac=$(openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//')
@@ -49,3 +49,4 @@ function cd() {
     fi
 }
 alias sshcopy='cat ~/.ssh/id_rsa.pub|pbcopy'
+alias ping88='ping 8.8.8.8'
