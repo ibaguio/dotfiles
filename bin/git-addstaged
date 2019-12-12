@@ -1,0 +1,4 @@
+#!/bin/bash
+# Add already staged files again
+
+git add $(git diff --relative --name-only --cached)
