@@ -1,7 +1,11 @@
 # Custom aliases and commands to be appended to shell's rc file
 
 # Don't use nano
-alias nano='vim'
+VIM=$(which vim || which vi)
+if [ -x $VIM ]; then
+  alias nano='vim'
+fi
+
 alias whatsmyip="dig TXT +short o-o.myaddr.l.google.com @ns1.google.com"
 
 # alias wget to curl in osx machines
@@ -41,12 +45,26 @@ alias kill_wine='ps ax |grep wine |cut -d" " -f2 |xargs kill'
 
 # Modify builtin CD with auto virtualenv activation
 # if the directory has a bin/activate file
-function cd() {
-    # cd to the directory
-    builtin cd $@
-    if [ -f venv/bin/activate ]; then
-        source venv/bin/activate
-    fi
-}
+# function cd() {
+#     # cd to the directory
+#     builtin cd $@
+#     if [ -f venv/bin/activate ]; then
+#         source venv/bin/activate
+#     fi
+# }
+
 alias sshcopy='cat ~/.ssh/id_rsa.pub|pbcopy'
 alias ping88='ping 8.8.8.8'
+
+
+# python related aliases
+alias pytest="python manage.py test --noinput"
+alias pym="python manage.py migrate"
+alias pymm="python manage.py makemigrations"
+alias pymmm="python manage.py makemigrations --merge;"
+alias pymx="python manage.py makemigrations --merge --verbosity 0; python manage.py makemigrations --verbosity 0; python manage.py migrate"
+
+alias kps="ps ax | grep 'python manage.py runserver_plus' | cut -d ' ' -f1|xargs kill"
+
+# node related aliases
+alias npm-exec='PATH=$(npm bin):$PATH'

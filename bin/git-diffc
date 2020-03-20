@@ -1,4 +1,5 @@
 #!/bin/bash
+# @author ibaguio
 # Show changes for a given hash
 
 ((!$#)) && echo No hash given, command ignored! && exit 1
