@@ -58,13 +58,14 @@ alias ping88='ping 8.8.8.8'
 
 
 # python related aliases
-alias pytest="python manage.py test --noinput"
+alias pytest="TESTING=1 python manage.py test --noinput"
+alias pytestff="TESTING=1 python manage.py test --failfast --noinput"
 alias pym="python manage.py migrate"
 alias pymm="python manage.py makemigrations"
-alias pymmm="python manage.py makemigrations --merge;"
+alias pymmm="python manage.py makemigrations --merge --no-input;"
 alias pymx="python manage.py makemigrations --merge --verbosity 0; python manage.py makemigrations --verbosity 0; python manage.py migrate"
 
-alias kps="ps ax | grep 'python manage.py runserver_plus' | cut -d ' ' -f1|xargs kill"
+alias kps="(ps ax | grep 'python manage.py runserver_plus' | tr -s ' ' | cut -d ' ' -f2 | xargs kill) || (ps ax | grep 'python manage.py runserver_plus' | tr -s ' ' | cut -d ' ' -f1 | xargs kill)"
 
 # node related aliases
 alias npm-exec='PATH=$(npm bin):$PATH'
