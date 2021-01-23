@@ -1,6 +1,0 @@
-#!/bin/bash
-# @author ibaguio
-# git add already staged files again
-
-GIT_ROOT_DIR=$(git rev-parse --show-toplevel)
-git add $(git diff --name-only --cached | tr '\n' '\0' | xargs -0 -L1 -I '$' echo $GIT_ROOT_DIR/'$')
